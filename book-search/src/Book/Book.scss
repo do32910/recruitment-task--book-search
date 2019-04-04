@@ -1,0 +1,24 @@
+.book-container{
+    list-style: none;
+    color: #eee;
+}
+.book{
+    background-color: #A2ABAB;
+    width: 80%;
+    display: flex;
+    padding: 20px;
+    &__title{
+        font-size: 30px;
+    }
+    &__cover{
+        width: 200px;
+        height: 300px;
+        border: 1px solid #7D869C;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__description{
+        padding: 10px;
+    }
+}
