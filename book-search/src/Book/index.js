@@ -16,7 +16,7 @@ export const Book = (props) => {
     <li className="book-container">
         <div className="book">
             <figure className="book__cover">
-                <img src={props.book.volumeInfo.imageLinks ? props.book.volumeInfo.imageLinks.thumbnail : ""} />
+                <img src={props.book.volumeInfo.imageLinks ? props.book.volumeInfo.imageLinks.thumbnail : ""} alt={props.book.volumeInfo.title}/>
             </figure>
             <div className="book-info">
                 <header className="book__title">{props.book.volumeInfo.title}</header>

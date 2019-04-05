@@ -1,24 +1,36 @@
 .book-container{
     list-style: none;
-    color: #eee;
+    color: #54471f;
+    display: flex;
+    
+    justify-content: center;
 }
 .book{
     background-color: #A2ABAB;
-    width: 80%;
+    width: 65%;
     display: flex;
-    padding: 20px;
+    padding: 20px 100px 20px 0;
+    margin-bottom: 20px;
+    box-shadow: 0 0 5px 0 #333;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
     &__title{
         font-size: 30px;
     }
     &__cover{
-        width: 200px;
-        height: 300px;
-        border: 1px solid #7D869C;
         display: flex;
         justify-content: center;
         align-items: center;
+        & img{
+            width: 150px;
+            height: 200px;
+            object-fit: cover;
+            padding: 15px;
+            border: 1px solid #7D869C;
+        }
     }
     &__description{
         padding: 10px;
     }
 }
+
