@@ -21,16 +21,21 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        & img{
+        &-img{
             width: 150px;
             height: 200px;
             object-fit: cover;
             padding: 15px;
             border: 1px solid #7D869C;
+            text-align: center;
         }
     }
     &__description{
         padding: 10px;
     }
+}
+
+.unavailable-info{
+    font-style: italic;
 }
 

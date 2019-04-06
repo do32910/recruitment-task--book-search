@@ -5,9 +5,10 @@ import './BookList.scss'
 
 export const BookList = (props) => {
     const books = props.books
-    if(books){
-        return <ul className="book-list">{props.books.map((book) => <Book book={book}/>)}</ul> 
+    console.log(books)
+    if(books !== null){
+        return <ul className="book-list">{props.books.map((book) => <Book book={book} key={book.id}/>)}</ul> 
     }else{
-        return <div>ajkoj</div>
+        return <p className="no-results-message">No results found</p>
     }
 }

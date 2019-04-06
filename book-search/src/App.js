@@ -13,15 +13,28 @@ class App extends Component {
       searchTerm: "",
       startIndex: 0
     }
-    this.getBooks = this.getBooks.bind(this)
+    this.setSearchTerm = this.setSearchTerm.bind(this)
   }
   
-  getBooks(searchTerm){
-    GetBooks(searchTerm, this.state.startIndex)
+  setSearchTerm(searchTerm){
+    this.setState({
+      searchTerm: searchTerm,
+      books: []
+    }, () => this.getBooks())
+  }
+
+  getBooks(){
+    GetBooks(this.state.searchTerm, this.state.startIndex)
     .then(results => {
-      this.setState({
-        books: this.state.books.concat(results.items)
-      })
+      if(results.totalItems == 0){
+        this.setState({
+          books: null
+        })
+      }else{
+        this.setState({
+          books: this.state.books.concat(results.items)
+        })
+      }
     })
   }
 
@@ -29,7 +42,7 @@ class App extends Component {
     if(window.scrollY + window.innerHeight + 1 > document.body.clientHeight){
       this.setState({
         startIndex: this.state.startIndex+10
-      }, this.getBooks(this.state.searchTerm, this.state.startIndex))
+      }, () => this.getBooks())
     }
   }
 
@@ -38,10 +51,9 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.books)
     return (
       <main className="main-container">
-        <SearchBar getBooks= {this.getBooks}/>
+        <SearchBar setSearchTerm={this.setSearchTerm}/>
         <BookList books={this.state.books}/>
       </main>
     );
