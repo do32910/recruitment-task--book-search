@@ -11,6 +11,6 @@ export const SearchBar = (props) => {
     return (
         <div className="search-bar">
         <input type="text" placeholder="Search..." className="search-bar__input" ref={searchTerm}/>
-        <button className="search-bar__btn" onClick={handleSearch}>Search</button>
+        <button className="search-bar__btn" onClick={handleSearch} disabled={props.searchDisabled}>Search</button>
         </div>)
     }

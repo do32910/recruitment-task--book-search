@@ -11,7 +11,9 @@ class App extends Component {
     this.state = {
       books: [],
       searchTerm: "",
-      startIndex: 0
+      startIndex: 0,
+      numOfResults: 10,
+      searchDisabled: false
     }
     this.setSearchTerm = this.setSearchTerm.bind(this)
   }
@@ -19,29 +21,42 @@ class App extends Component {
   setSearchTerm(searchTerm){
     this.setState({
       searchTerm: searchTerm,
-      books: []
+      books: [],
+      startIndex: 0,
+      err: false,
+      searchDisabled: true
     }, () => this.getBooks())
   }
 
   getBooks(){
-    GetBooks(this.state.searchTerm, this.state.startIndex)
+    GetBooks(this.state.searchTerm, this.state.startIndex, this.state.numOfResults)
     .then(results => {
       if(results.totalItems == 0){
         this.setState({
-          books: null
+          books: null,
+          searchDisabled: false
         })
-      }else{
+      }else if(results.items){
         this.setState({
-          books: this.state.books.concat(results.items)
+          books: this.state.books.concat(results.items),
+          searchDisabled: false
         })
       }
+    }).catch(err => {
+      console.log("Something went wrong:")
+      console.log(err)
+      this.setState({
+        err: true,
+        searchDisabled: false
+      }) 
     })
+
   }
 
   handleScroll = (e) => {
     if(window.scrollY + window.innerHeight + 1 > document.body.clientHeight){
       this.setState({
-        startIndex: this.state.startIndex+10
+        startIndex: this.state.startIndex+this.state.numOfResults
       }, () => this.getBooks())
     }
   }
@@ -53,7 +68,8 @@ class App extends Component {
   render() {
     return (
       <main className="main-container">
-        <SearchBar setSearchTerm={this.setSearchTerm}/>
+        <SearchBar setSearchTerm={this.setSearchTerm} searchDisabled={this.state.searchDisabled}/>
+        { this.state.err ? <span>Search failed. Please try again later.</span> : null}
         <BookList books={this.state.books}/>
       </main>
     );

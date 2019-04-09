@@ -27,8 +27,13 @@
         outline: none;
         border-top-right-radius: 2px;
         border-bottom-right-radius: 2px;
+        cursor: pointer;
         &:focus{
             box-shadow: inset 0 0 2px 1px #A2ABAB;
+        }
+        &:disabled{
+            opacity: 0.5;
+            cursor: default;
         }
     }
 }

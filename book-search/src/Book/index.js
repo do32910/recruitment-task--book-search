@@ -10,7 +10,7 @@ export const Book = (props) => {
             </figure>
             <div className="book-info">
                 <header className="book__title">{props.book.volumeInfo.title}</header>
-                <p className="book__description">{props.book.volumeInfo.description ? props.book.volumeInfo.description : <span className="unavailable-info">No description provided</span>}</p>
+                <p className="book__description">{props.book.volumeInfo.description ? props.book.volumeInfo.description.replace(/^(.{100}[^\s]*).*/, "$1") + "(...)" : <span className="unavailable-info">No description provided</span>}</p>
             </div>
         </div>
     </li>
